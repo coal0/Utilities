@@ -203,7 +203,6 @@ class Autocomplete(tk.Frame, object):
             matches = {}
             for entry in self._entries:
                 lcs = len(_longest_common_substring(text, entry))
-                # if lcs >= 2:
                 if lcs:
                     matches[entry] = lcs
             sorted_items = sorted(list(matches.items()),
