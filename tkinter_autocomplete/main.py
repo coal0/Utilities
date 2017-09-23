@@ -4,7 +4,11 @@ try:
 except ImportError:
     # Python 2
     import Tkinter as tk
-    from tkinter import ttk
+    import ttk
+
+__all__ = ["AutocompleteEntry"]
+
+NO_RESULTS_MESSAGE = "No results found for '{}'"
 
 
 class AutocompleteEntry(tk.Frame, object):
@@ -68,6 +72,7 @@ class AutocompleteEntry(tk.Frame, object):
     def build(
               self,
               entries,
+              max_entries=5,
               case_sensitive=False,
               no_results_message=NO_RESULTS_MESSAGE
             ):
@@ -78,6 +83,7 @@ class AutocompleteEntry(tk.Frame, object):
 
         Arguments:
         entries -- An iterable containg autocompletion entries (strings)
+        max_entries -- [int] The maximum number of entries to display
         case_sensitive -- [bool] Set to `True` to make autocompletion
                           case-sensitive
         no_results_message -- [str] Message to display when no entries
@@ -94,7 +100,7 @@ class AutocompleteEntry(tk.Frame, object):
         self._case_sensitive = case_sensitive
         self._entries = entries
         self._no_results_message = no_results_message
-        self._selected = 0
+        self._listbox_height = max_entries
 
         self.entry.bind("<KeyRelease>", self._update_autocomplete)
         self.entry.focus()
@@ -103,14 +109,14 @@ class AutocompleteEntry(tk.Frame, object):
         self.listbox.bind("<<ListboxSelect>>", self._select_entry)
         self.listbox.grid(column=0, row=1)
         self.listbox.grid_forget()
-        # Initially, the listbox widget shouldn't show up.
+        # Initially, the listbox widget doesn't show up.
 
     def _update_autocomplete(self, event):
         """Internal method.
         Update `self.listbox` to display new matches.
         """
         self.listbox.delete(0, tk.END)
-        self.listbox["height"] = self.LISTBOX_HEIGHT
+        self.listbox["height"] = self._listbox_height
 
         text = self.text.get()
         if not self._case_sensitive:
@@ -119,7 +125,7 @@ class AutocompleteEntry(tk.Frame, object):
             self.listbox.grid_forget()
         else:
             for entry in self._entries:
-                if entry.strip().startswith(text):
+                if text in entry.strip():
                     self.listbox.insert(tk.END, entry)
 
         listbox_size = self.listbox.size()

@@ -59,6 +59,9 @@ entry.build(ENTRIES)
 
 You can pass additional arguments to `build`:
 
+* `max_entries` (integer):<br />
+  The maximum number of entries to display at once. This value directly corresponds to the listbox widget's `height` attribute. Defaults to `5`.
+
 * `case_sensitive` (boolean):<br />
   If `True`, only autocomplete entries that enforce the same capitalization as the current entry will be displayed.<br />
   If `False`, all autocomplete entries that match with the current entry will be displayed.<br />
@@ -66,8 +69,7 @@ You can pass additional arguments to `build`:
 
 * `no_results_message` (string or `None`):<br />
   The message to display if no suggestions could be found for the current entry.<br />
-  This argument may include a formatting identifier (`{}`) which, during runtime, gets formatted as the current entry.<br />
-  If `None` is specified, the listbox will instead be hidden until the next `<KeyRelease>` event.
+  This argument may include a formatting identifier (`{}`) which, during runtime, gets formatted as the current entry. If `None` is specified, the listbox will instead be hidden until the next `<KeyRelease>` event.
   
 Let's play around with these arguments:
 
@@ -81,7 +83,7 @@ entry.build(
 
 ###### NOTE: You may call the `build` method multiple times on an instance of `AutocompleteEntry`, to dynamically change the available suggestions.
 
-With that out of the way, you can display the `entry` frame:
+With that out of the way, you can display `entry`:
 
 ```python
 entry.pack()
@@ -90,6 +92,18 @@ entry.pack()
 Now, each time a user presses a key while the entry widget has focus, a list of suggestions will display below it.
 
 ---
+
+### Additional options
+
+By default, the `tk.Listbox` widget has a width of `25` pixels and a height of `5` (items). The `tk.Entry` widget also has a default width of `25` pixels. These settings can be modified through the following class attributes:
+
+* `AutocompleteEntry.LISTBOX_HEIGHT`: The height to specify when creating the `tk.Listbox` widget. There's no need to modify this since the maximum number of entries to be displayed can be passed as an argument to `build`.
+
+* `AutocompleteEntry.LISTBOX_WIDTH`: The width to specify when creating the `tk.Listbox` widget. Any positive integer is valid.
+
+* `AutocompleteEntry.ENTRY_WIDTH`: The width to specify when creating the `tk.Entry` widget. Any positive integer is valid.
+
+###### NOTE: You almost always want to keep the 1:1 `LISTBOX_WIDTH`:`ENTRY_WIDTH` ratio.
 
 You can retrieve the current entry by accessing the instance's `text` attribute (which is a `tk.StringVar` instance):
 
