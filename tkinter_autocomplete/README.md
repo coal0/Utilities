@@ -97,7 +97,7 @@ Now, each time a user presses a key while the entry widget has focus, a list of 
 
 By default, the `tk.Listbox` widget has a width of `25` pixels and a height of `5` (items). The `tk.Entry` widget also has a default width of `25` pixels. These settings can be modified through the following class attributes:
 
-* `AutocompleteEntry.LISTBOX_HEIGHT`: The height to specify when creating the `tk.Listbox` widget. There's no need to modify this since the maximum number of entries to be displayed can be passed as an argument to `build`.
+* `AutocompleteEntry.LISTBOX_HEIGHT`: The height to specify when creating the `tk.Listbox` widget. There's no need to modify this, since the maximum number of entries to be displayed can be passed as an argument to `build`.
 
 * `AutocompleteEntry.LISTBOX_WIDTH`: The width to specify when creating the `tk.Listbox` widget. Any positive integer is valid.
 
