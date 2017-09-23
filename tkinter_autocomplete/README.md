@@ -10,17 +10,17 @@ References:
 
 ### Structure
 
-###### NOTE: The `Tkinter` library for Python 2 and `tkinter` library for Python 3 will henceforth be referred to as `tk`.
+###### NOTE: The `Tkinter` library for Python 2 and `tkinter` library for Python 3 will from now on be referred to as `tk`.
 
-The `Autocomplete` class (which can be found [here](https://github.com/Coal0/Utilities/blob/master/tkinter_autocomplete/autocomplete.py))
-derives from `tk.Frame` and is a container used to group a `tk.Entry` and `tk.Listbox` widget. Should we need to modify the widgets,
-they can be accessed as (respectively) `Autocomplete` s `entry_widget` and `listbox_widget` attributes.<br />
+The `AutocompleteEntry` class (which can be found [here](https://github.com/Coal0/Utilities/blob/master/tkinter_autocomplete/main.py))
+derives from `tk.Frame` and is a container used to group a `tk.Entry` and `tk.Listbox` widget. Should you need to modify the widgets,
+they can be accessed as (respectively) `AutocompleteEntry` s `entry` and `listbox` attributes.<br />
 
 The entry widget acts like a normal textbox. When activated, it binds `<KeyRelease>` to a private method which will update
 the list of suggestions. The listbox widget contains the suggestions themselves. When activated, it binds `<<ListboxSelect>>` to a
-private method which `set` s the entry widget to whatever value was selected.<br />
+private method which sets the entry widget to whatever value was selected.<br />
 
-Since an instance of `Autocomplete` is a `tk.Frame` instance too, we can place it by calling its `pack()` or `grid()` methods with
+Since an instance of `AutocompleteEntry` is a `tk.Frame` instance too, you can place it by calling its `pack` or `grid` methods with
 their respective arguments.
 
 ### Quickstart
@@ -33,17 +33,20 @@ To add a new Autocomplete frame to our interface, first initialize one:
 ```python
 import tkinter as tk
 
-from autocomplete import Autocomplete
+from autocomplete import AutocompleteEntry
 
 root = tk.Tk()
+
 frame = tk.Frame(root)
 frame.pack()
 
-autocomplete_frame = Autocomplete(frame)
+entry = AutocompleteEntry(frame)
+# You can pass additional parameters to further customize the window;
+# all parameters that you can pass to tk.Frame, are valid here too.
 ```
 
-Now we need to configure the instance by passing it an iterable containing all autocomplete-entries.<br />
-We do this by calling its `build()` method:
+Now you need to configure the instance by passing it an iterable containing all autocompletion entries.<br />
+Do this by calling its `build` method:
 
 ```python
 ENTRIES = (
@@ -51,65 +54,59 @@ ENTRIES = (
     "Bar"
 )
 
-autocomplete_frame.build(ENTRIES)
+entry.build(ENTRIES)
 ```
 
-We can pass additional arguments to `build()`:
-
-* `match_exact` (boolean):<br />
-  If `True`, only autocomplete entries that start with the current entry will be displayed.<br />
-  If `False`, the most relevant results will be shown depending on the length of the
-  [longest common substring](https://en.wikipedia.org/wiki/Longest_common_substring_problem).<br />
-  Defaults to `False`.
+You can pass additional arguments to `build`:
 
 * `case_sensitive` (boolean):<br />
   If `True`, only autocomplete entries that enforce the same capitalization as the current entry will be displayed.<br />
-  If `False`, all autocomplete entries that match according to the rules defined in correspondence with the `match_exact` argument.<br />
+  If `False`, all autocomplete entries that match with the current entry will be displayed.<br />
   Defaults to `False`.
 
-* `no_results_message` (string or None):<br />
+* `no_results_message` (string or `None`):<br />
   The message to display if no suggestions could be found for the current entry.<br />
-  This argument may include a 'formatting key' (`{}`) which, during runtime, gets formatted as the current entry.<br />
+  This argument may include a formatting identifier (`{}`) which, during runtime, gets formatted as the current entry.<br />
   If `None` is specified, the listbox will instead be hidden until the next `<KeyRelease>` event.
   
 Let's play around with these arguments:
 
 ```python
-autocomplete_frame.build(
+entry.build(
     entries=ENTRIES,
     no_results_message="< No results found for '{}' >"
     # Note that this is formatted at runtime
 )
 ```
 
-###### NOTE: We may call the `build()` method multiple times on an instance of `Autocomplete`.
+###### NOTE: You may call the `build` method multiple times on an instance of `AutocompleteEntry`, to dynamically change the available suggestions.
 
-Now that we have that out of the way, we can simply display the `autocomplete_frame` frame by calling its `pack()` method:
+With that out of the way, you can display the `entry` frame:
 
 ```python
-autocomplete_frame.pack()
+entry.pack()
 ```
 
 Now, each time a user presses a key while the entry widget has focus, a list of suggestions will display below it.
 
 ---
 
-We can retrieve the current entry by accessing the instance's `text` attribute (which is a `tk.StringVar()` instance):
+You can retrieve the current entry by accessing the instance's `text` attribute (which is a `tk.StringVar` instance):
 
 ```python
-text = autocomplete_frame.text.get()
+text = entry.text.get()
 ```
 
-To further customize the entry widget, we may set its font options, for example:
+To further customize the entry widget, you may set its font options, for example:
 
 ```python
-autocomplete_frame.entry_widget["font"] = (<FONT NAME>, <FONT SIZE>, <FONT WEIGHT>)
+entry.entry["font"] = (<FONT NAME>, <FONT SIZE>, <FONT WEIGHT>)
 ```
 
 Or to change the background color for the listbox widget:
 
 ```python
-autocomplete_frame.listbox_widget["background"] = "#cfeff9"
+entry.listbox["background"] = "#cfeff9"
 # Light blue
 ```
 
