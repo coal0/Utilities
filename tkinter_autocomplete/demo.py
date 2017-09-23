@@ -6,8 +6,8 @@ except ImportError:
     import Tkinter as tk
     import ttk
 
-from elements import AutocompleteEntry
-from elements import NO_RESULTS_MESSAGE
+from main import AutocompleteEntry
+from main import NO_RESULTS_MESSAGE
 
 COUNTRIES = open("countries.txt").read().split("\n")
 
