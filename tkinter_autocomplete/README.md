@@ -33,7 +33,7 @@ To add a new Autocomplete frame to our interface, first initialize one:
 ```python
 import tkinter as tk
 
-from autocomplete import AutocompleteEntry
+from main import AutocompleteEntry
 
 root = tk.Tk()
 
