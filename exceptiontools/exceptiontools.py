@@ -9,8 +9,10 @@ def raises(callable, args=(), kwargs={}):
 
     Arguments:
     - callable: A callable object.
+
     - args: A list or tuple containing positional arguments to `callable`.
       Defaults to an empty tuple.
+
     - kwargs: A dictionary containing keyword arguments to `callable`.
       Defaults to an empty dictionary.
     """
@@ -30,8 +32,11 @@ def suppress(*exceptions):
     Arguments:
     - *exceptions: The exceptions to suppress.
       All exceptions must derive from `BaseException`.
+
     - callable: A callable object.
+
     - *args: Positional arguments to `callable`.
+
     - **kwargs: Keyword arguments to `callable`.
     """
     def wrap(callable):
@@ -52,6 +57,7 @@ def raise_from_context(exception, context=None):
 
     Arguments:
     - exception: An exception (derived from `BaseException`).
+
     - context: The context from which to raise `exception`.
       Defaults to `None`.
     """
