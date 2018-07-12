@@ -23,7 +23,7 @@ that may be cached. Take a look:
 What the ``cached()`` decorator does is:
 
 1. Check if the name '_stripped_string' is already an existing attribute of the class;
-2. If it is not, assign the return value of `stripped()` to ``String._stripped_string``;
+2. If it is not, assign the return value of ``String.stripped()`` to ``String._stripped_string``;
 3. Return ``String._stripped_string`` (which is now guaranteed to exist).
 
 That's the crux of it.
