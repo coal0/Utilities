@@ -27,8 +27,7 @@ their respective arguments.
 
 ###### NOTE: These examples will only run under Python 3. To make them Python 2-compatible, replace `tkinter` with `Tkinter`.
 
-
-To add a new Autocomplete frame to our interface, first initialize one:
+To add a new autocompletion frame to our interface, first initialize one:
 
 ```python
 import tkinter as tk
@@ -69,7 +68,7 @@ You can pass additional arguments to `build`:
 
 * `no_results_message` (string or `None`):<br />
   The message to display if no suggestions could be found for the current entry.<br />
-  This argument may include a formatting identifier (`{}`) which, during runtime, gets formatted as the current entry. If `None` is specified, the listbox will instead be hidden until the next `<KeyRelease>` event.
+  This argument may include a formatting identifier (`{}`) which, at runtime, gets formatted as the current entry. If `None` is specified, the listbox will instead be hidden until the next `<KeyRelease>` event.
   
 Let's play around with these arguments:
 
