@@ -1,7 +1,7 @@
 ## Tkinter Autocomplete
 
 Text autocompletion provides relevant real-time results to users.
-Because tkinter does not provide an easy 'set it and forget it' widget for adding autocompletion to GUI's,
+Because tkinter does not provide a widget for adding autocompletion to GUIs out of the box,
 I decided to make one myself. This utility is compatible with and has been tested on Python 2.7.1 and Python 3.6.0.<br />
 
 References:
